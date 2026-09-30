@@ -220,17 +220,23 @@ footer a{color:#5DCAA5;text-decoration:none}
   <div class="hero-inner">
     <div class="hero-badge">💻 100% Online Courses</div>
     <h1>Master In-Demand<br><span>Digital Skills</span></h1>
-    <p>Learn from anywhere. Professional courses in Computer Packages, Coding, AI, and Online Freelancing — delivered fully online, with real support from our office at La Serene, Kericho. Certificate awarded on completion.</p>
+    <p>Learn from anywhere. Professional courses in Computer Packages, Coding, AI, Data Analysis, Cybersecurity, Digital Marketing, and more — delivered fully online, with real support from our office at La Serene, Kericho. Certificate awarded on completion.</p>
     <div class="hero-courses">
       <span class="hc-pill">💻 Computer Packages</span>
       <span class="hc-pill">🌐 Web Dev</span>
       <span class="hc-pill">🐍 Python</span>
       <span class="hc-pill">🤖 AI Fundamentals</span>
+      <span class="hc-pill">📈 Power BI</span>
+      <span class="hc-pill">📉 Tableau</span>
+      <span class="hc-pill">🔐 Cybersecurity</span>
+      <span class="hc-pill">📱 Digital Marketing</span>
+      <span class="hc-pill">🗄️ SQL</span>
+      <span class="hc-pill">📋 Project Management</span>
       <span class="hc-pill">✍️ Freelancing</span>
     </div>
     <button class="hero-cta" onclick="scrollToForm()">Register Now — It Takes 3 Minutes →</button>
     <div class="hero-stats">
-      <div><div class="stat-num">4</div><div class="stat-lbl">Courses Available</div></div>
+      <div><div class="stat-num">12</div><div class="stat-lbl">Courses Available</div></div>
       <div><div class="stat-num">Ksh 2K</div><div class="stat-lbl">Starting Price</div></div>
       <div><div class="stat-num">100%</div><div class="stat-lbl">Certificate Awarded</div></div>
       <div><div class="stat-num">5</div><div class="stat-lbl">Daily Time Slots</div></div>
@@ -297,6 +303,60 @@ footer a{color:#5DCAA5;text-decoration:none}
           <div class="course-name">AI Fundamentals</div>
           <div class="course-desc">ChatGPT &amp; AI tools, prompt writing, AI for work and income — no tech background needed</div>
           <div class="course-meta"><div class="course-price">Ksh 2,600</div><div class="course-dur">1 month</div></div>
+        </div>
+        <div class="course-card" id="cc-4" onclick="selectCourse(4,'Advanced Excel',2000,'1 month')">
+          <div class="course-icon">📊</div>
+          <div class="course-name">Advanced Excel</div>
+          <div class="course-desc">Pivot tables, advanced formulas, Power Query, dashboards — take your Excel skills further</div>
+          <div class="course-meta"><div class="course-price">Ksh 2,000</div><div class="course-dur">1 month</div></div>
+        </div>
+        <div class="course-card" id="cc-5" onclick="selectCourse(5,'Power BI',3000,'2 months')">
+          <div class="course-icon">📈</div>
+          <div class="course-name">Power BI</div>
+          <div class="course-desc">Build interactive dashboards, data modeling, DAX formulas — in-demand business intelligence skill</div>
+          <div class="course-meta"><div class="course-price">Ksh 3,000</div><div class="course-dur">2 months</div></div>
+        </div>
+        <div class="course-card" id="cc-6" onclick="selectCourse(6,'Tableau',3000,'2 months')">
+          <div class="course-icon">📉</div>
+          <div class="course-name">Tableau</div>
+          <div class="course-desc">Data visualization, interactive dashboards, storytelling with data — a leading BI tool</div>
+          <div class="course-meta"><div class="course-price">Ksh 3,000</div><div class="course-dur">2 months</div></div>
+        </div>
+        <div class="course-card" id="cc-7" onclick="selectCourse(7,'SPSS',3000,'1.5 months')">
+          <div class="course-icon">📐</div>
+          <div class="course-name">SPSS</div>
+          <div class="course-desc">Statistical analysis for research, surveys &amp; academic work — widely used in data analysis</div>
+          <div class="course-meta"><div class="course-price">Ksh 3,000</div><div class="course-dur">1.5 months</div></div>
+        </div>
+        <div class="course-card" id="cc-8" onclick="selectCourse(8,'Cybersecurity Fundamentals',3500,'2 months')">
+          <div class="course-icon">🔐</div>
+          <div class="course-name">Cybersecurity Fundamentals</div>
+          <div class="course-desc">Phishing, network safety, password security, cyber threats — essential for every employee and business</div>
+          <div class="course-meta"><div class="course-price">Ksh 3,500</div><div class="course-dur">2 months</div></div>
+        </div>
+        <div class="course-card" id="cc-9" onclick="selectCourse(9,'Digital Marketing & Social Media',3000,'1.5 months')">
+          <div class="course-icon">📱</div>
+          <div class="course-name">Digital Marketing &amp; Social Media</div>
+          <div class="course-desc">SEO, social media strategy, content creation, Google Ads basics — grow any business online</div>
+          <div class="course-meta"><div class="course-price">Ksh 3,000</div><div class="course-dur">1.5 months</div></div>
+        </div>
+        <div class="course-card" id="cc-10" onclick="selectCourse(10,'SQL for Beginners',3000,'1 month')">
+          <div class="course-icon">🗄️</div>
+          <div class="course-name">SQL for Beginners</div>
+          <div class="course-desc">Query databases, filter and join data — the essential skill that pairs with Power BI, Tableau &amp; data analysis</div>
+          <div class="course-meta"><div class="course-price">Ksh 3,000</div><div class="course-dur">1 month</div></div>
+        </div>
+        <div class="course-card" id="cc-11" onclick="selectCourse(11,'Project Management Fundamentals',3500,'2 months')">
+          <div class="course-icon">📋</div>
+          <div class="course-name">Project Management Fundamentals</div>
+          <div class="course-desc">Planning, scheduling, risk management, Agile &amp; Scrum basics — cross-industry, in demand everywhere</div>
+          <div class="course-meta"><div class="course-price">Ksh 3,500</div><div class="course-dur">2 months</div></div>
+        </div>
+        <div class="course-card" id="cc-12" onclick="selectCourse(12,'Java Programming',4000,'3 months')">
+          <div class="course-icon">☕</div>
+          <div class="course-name">Java Programming</div>
+          <div class="course-desc">Object-oriented programming, Java syntax, data structures &amp; building real applications — widely used in enterprise software &amp; Android development</div>
+          <div class="course-meta"><div class="course-price">Ksh 4,000</div><div class="course-dur">3 months</div></div>
         </div>
       </div>
 
@@ -477,6 +537,14 @@ footer a{color:#5DCAA5;text-decoration:none}
     <div class="card"><div class="course-icon" style="font-size:24px">🖥️</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Coding for Beginners</div><ul style="font-size:12px;color:var(--text2);padding-left:16px;margin-bottom:12px;line-height:1.9"><li>Track 1: Web Dev — HTML, CSS, JavaScript</li><li>Track 2: C, C++ Foundations</li><li>Track 3: Python Programming</li></ul><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 4,000/track</div><div class="course-dur">3 months</div></div></div>
     <div class="card"><div class="course-icon" style="font-size:24px">✍️</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Online Writing &amp; Freelancing</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Academic writing, SEO, Blogging, AI Tools, Upwork &amp; Fiverr</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 2,500</div><div class="course-dur">1 month</div></div></div>
     <div class="card"><div class="course-icon" style="font-size:24px">🤖</div><div class="course-name" style="font-size:17px;margin-bottom:8px">AI Fundamentals</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">ChatGPT &amp; AI tools, prompt writing, AI for work and income — no tech background needed</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 2,600</div><div class="course-dur">1 month</div></div></div>
+    <div class="card"><div class="course-icon" style="font-size:24px">📊</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Advanced Excel</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Pivot tables, advanced formulas, Power Query, dashboards — take your Excel skills further</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 2,000</div><div class="course-dur">1 month</div></div></div>
+    <div class="card"><div class="course-icon" style="font-size:24px">📈</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Power BI</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Build interactive dashboards, data modeling, DAX formulas — in-demand business intelligence skill</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,000</div><div class="course-dur">2 months</div></div></div>
+    <div class="card"><div class="course-icon" style="font-size:24px">📉</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Tableau</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Data visualization, interactive dashboards, storytelling with data — a leading BI tool</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,000</div><div class="course-dur">2 months</div></div></div>
+    <div class="card"><div class="course-icon" style="font-size:24px">📐</div><div class="course-name" style="font-size:17px;margin-bottom:8px">SPSS</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Statistical analysis for research, surveys &amp; academic work — widely used in data analysis</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,000</div><div class="course-dur">1.5 months</div></div></div>
+    <div class="card"><div class="course-icon" style="font-size:24px">🔐</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Cybersecurity Fundamentals</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Phishing, network safety, password security, cyber threats — essential for every employee and business</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,500</div><div class="course-dur">2 months</div></div></div>
+    <div class="card"><div class="course-icon" style="font-size:24px">📱</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Digital Marketing &amp; Social Media</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">SEO, social media strategy, content creation, Google Ads basics — grow any business online</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,000</div><div class="course-dur">1.5 months</div></div></div>
+    <div class="card"><div class="course-icon" style="font-size:24px">🗄️</div><div class="course-name" style="font-size:17px;margin-bottom:8px">SQL for Beginners</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Query databases, filter and join data — the essential skill that pairs with Power BI, Tableau &amp; data analysis</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,000</div><div class="course-dur">1 month</div></div></div>
+    <div class="card"><div class="course-icon" style="font-size:24px">📋</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Project Management Fundamentals</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Planning, scheduling, risk management, Agile &amp; Scrum basics — cross-industry, in demand everywhere</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,500</div><div class="course-dur">2 months</div></div></div>
   </div>
   <div class="card" style="max-width:600px;margin-top:16px">
     <div style="font-weight:600;font-family:'Sora',sans-serif;margin-bottom:6px">Schedule &amp; Options</div>
@@ -589,7 +657,7 @@ function renderSlots(){
 
 // ── SELECTIONS ──
 function selectCourse(idx,name,price,dur){
-  [0,1,2,3].forEach(function(i){ document.getElementById('cc-'+i).classList.remove('selected'); });
+  [0,1,2,3,4,5,6,7,8,9,10,11].forEach(function(i){ document.getElementById('cc-'+i).classList.remove('selected'); });
   document.getElementById('cc-'+idx).classList.add('selected');
   st.courseName=name; st.coursePrice=price; st.courseDuration=dur; st.track='';
   if(idx!==1){ var ts=document.getElementById('track-sel'); if(ts) ts.value=''; }
@@ -763,7 +831,7 @@ function goStep4Paypal(){
 
 function newReg(){
   st={courseName:'',coursePrice:0,courseDuration:'',track:'',slot:'',mode:'',name:'',phone:'',email:'',mpesaCode:'',hasWhatsapp:true};
-  [0,1,2,3].forEach(function(i){document.getElementById('cc-'+i).classList.remove('selected');});
+  [0,1,2,3,4,5,6,7,8,9,10,11].forEach(function(i){document.getElementById('cc-'+i).classList.remove('selected');});
   document.querySelectorAll('.mode-card').forEach(function(c){c.classList.remove('selected');});
   ['inp-name','inp-phone','inp-email'].forEach(function(id){document.getElementById(id).value='';});
   document.getElementById('mpesa-code').value='';
