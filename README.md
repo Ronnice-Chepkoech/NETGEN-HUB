@@ -1,945 +1,107 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>NextGen Digital Skills Hub — Enroll Now</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
-<style>
-:root{
-  --green:#0F6E56;--green-light:#1D9E75;--green-pale:#E1F5EE;
-  --amber:#854F0B;--amber-pale:#FAEEDA;--amber-mid:#EF9F27;
-  --red:#A32D2D;--red-pale:#FCEBEB;
-  --blue:#185FA5;--blue-pale:#E6F1FB;
-  --dark:#0d1f1a;--dark2:#132b24;--dark3:#1a3d32;
-  --text:#0d1f1a;--text2:#4a5e58;--text3:#8aa39c;
-  --border:#d0e8e0;--surface:#f4faf8;--white:#ffffff;
-  --r:12px;--rs:8px;
-}
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:'DM Sans',sans-serif;background:var(--surface);color:var(--text);min-height:100vh}
-h1,h2,h3,.heading{font-family:'Sora',sans-serif}
-.hero{background:var(--dark);color:#fff;position:relative;overflow:hidden}
-.hero-inner{max-width:1100px;margin:0 auto;padding:56px 24px 48px;position:relative;z-index:1}
-.hero-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(29,158,117,0.2);border:1px solid rgba(29,158,117,0.4);color:#5DCAA5;padding:5px 14px;border-radius:99px;font-size:12px;font-weight:500;margin-bottom:20px;font-family:'Sora',sans-serif}
-.hero h1{font-size:clamp(32px,5vw,56px);font-weight:800;line-height:1.1;letter-spacing:-1.5px;margin-bottom:12px}
-.hero h1 span{color:#5DCAA5}
-.hero p{font-size:16px;color:rgba(255,255,255,0.65);max-width:520px;line-height:1.65;margin-bottom:32px}
-.hero-courses{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:36px}
-.hc-pill{background:rgba(255,255,255,0.07);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.8);padding:6px 14px;border-radius:99px;font-size:12px;font-weight:500}
-.hero-cta{display:inline-flex;align-items:center;gap:8px;background:var(--green-light);color:#fff;padding:14px 28px;border-radius:var(--r);font-family:'Sora',sans-serif;font-weight:600;font-size:15px;text-decoration:none;cursor:pointer;border:none;transition:background 0.2s,transform 0.15s}
-.hero-cta:hover{background:#0F6E56;transform:translateY(-1px)}
-.hero-bg{position:absolute;top:-60px;right:-80px;width:500px;height:500px;border-radius:50%;background:radial-gradient(circle,rgba(29,158,117,0.18) 0%,transparent 70%);pointer-events:none}
-.hero-stats{display:flex;gap:32px;margin-top:40px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.1)}
-.stat-num{font-family:'Sora',sans-serif;font-size:28px;font-weight:700;color:#5DCAA5}
-.stat-lbl{font-size:12px;color:rgba(255,255,255,0.5);margin-top:2px}
-nav{background:var(--dark2);border-bottom:1px solid rgba(255,255,255,0.07);position:sticky;top:0;z-index:100}
-.nav-inner{max-width:1100px;margin:0 auto;padding:0 24px;display:flex;align-items:center;height:54px;gap:8px}
-.nav-logo{font-family:'Sora',sans-serif;font-weight:700;color:#fff;font-size:15px;margin-right:auto}
-.nav-logo span{color:#5DCAA5}
-.nav-btn{padding:7px 16px;border-radius:var(--rs);border:none;background:transparent;color:rgba(255,255,255,0.6);font-size:13px;font-family:'DM Sans',sans-serif;cursor:pointer;transition:all 0.15s}
-.nav-btn:hover,.nav-btn.active{background:rgba(255,255,255,0.08);color:#fff}
-.nav-admin{background:rgba(29,158,117,0.15);color:#5DCAA5;border:1px solid rgba(29,158,117,0.3)}
-.page{display:none;max-width:1100px;margin:0 auto;padding:32px 24px 60px}
-.page.show{display:block}
-.sec-hdr{margin-bottom:28px}
-.sec-hdr h2{font-size:26px;font-weight:700;letter-spacing:-0.5px;color:var(--dark)}
-.sec-hdr p{color:var(--text2);margin-top:6px;font-size:14px}
-.stepper{display:flex;align-items:center;gap:0;margin-bottom:36px}
-.step-item{display:flex;align-items:center;gap:8px;flex:1}
-.step-item:last-child{flex:none}
-.step-dot{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:13px;font-weight:700;flex-shrink:0;transition:all 0.3s}
-.step-dot.done{background:var(--green);color:#fff}
-.step-dot.active{background:var(--green-light);color:#fff;box-shadow:0 0 0 4px rgba(29,158,117,0.2)}
-.step-dot.idle{background:var(--border);color:var(--text3)}
-.step-line{flex:1;height:2px;background:var(--border);margin:0 4px;transition:background 0.3s}
-.step-line.done{background:var(--green)}
-.step-label{font-size:11px;font-weight:500;color:var(--text3);white-space:nowrap}
-.step-label.active{color:var(--green)}
-.step-label.done{color:var(--green)}
-.step-panel{display:none}
-.step-panel.show{display:block;animation:fadeUp 0.3s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
-.card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:24px}
-.card-green{background:var(--green-pale);border:1px solid #9FE1CB;border-radius:var(--r);padding:20px}
-.course-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:28px}
-.course-card{background:var(--white);border:2px solid var(--border);border-radius:var(--r);padding:20px;cursor:pointer;transition:all 0.2s;position:relative}
-.course-card:hover{border-color:var(--green-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,110,86,0.1)}
-.course-card.selected{border-color:var(--green);background:#f0faf7}
-.course-card.selected::after{content:'✓';position:absolute;top:12px;right:12px;width:22px;height:22px;background:var(--green);color:#fff;border-radius:50%;font-size:12px;font-weight:700;display:flex;align-items:center;justify-content:center}
-.course-icon{width:40px;height:40px;border-radius:var(--rs);background:var(--green-pale);display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:12px}
-.course-name{font-family:'Sora',sans-serif;font-weight:700;font-size:15px;color:var(--dark);margin-bottom:4px}
-.course-desc{font-size:12px;color:var(--text2);line-height:1.55;margin-bottom:12px}
-.course-meta{display:flex;justify-content:space-between;align-items:center}
-.course-price{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;color:var(--green)}
-.course-dur{font-size:11px;color:var(--text3);font-weight:500;background:var(--surface);padding:3px 8px;border-radius:99px}
-.track-select{margin-top:12px;width:100%;padding:8px;border:1px solid var(--border);border-radius:var(--rs);font-size:13px;background:var(--white);font-family:'DM Sans',sans-serif;display:none}
-.course-card.selected .track-select{display:block}
-.slot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin-bottom:28px}
-.slot-card{background:var(--white);border:2px solid var(--border);border-radius:var(--r);padding:14px 16px;cursor:pointer;transition:all 0.2s;text-align:center}
-.slot-card:hover:not(.slot-full){border-color:var(--green-light)}
-.slot-card.selected{border-color:var(--green);background:#f0faf7}
-.slot-card.slot-full{opacity:0.45;cursor:not-allowed;background:var(--surface)}
-.slot-time{font-family:'Sora',sans-serif;font-weight:700;font-size:14px;color:var(--dark);margin-bottom:4px}
-.slot-avail{font-size:11px;color:var(--text3)}
-.slot-avail.warn{color:var(--amber)}
-.slot-avail.full{color:var(--red)}
-.mode-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:10px;margin-bottom:28px}
-.mode-card{background:var(--white);border:2px solid var(--border);border-radius:var(--r);padding:12px 16px;cursor:pointer;transition:all 0.2s;display:flex;align-items:center;gap:10px}
-.mode-card:hover{border-color:var(--green-light)}
-.mode-card.selected{border-color:var(--green);background:#f0faf7}
-.mode-icon{font-size:20px}
-.mode-name{font-size:13px;font-weight:500;color:var(--dark)}
-.form-row{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:14px}
-.form-row.one{grid-template-columns:1fr}
-.fgroup{display:flex;flex-direction:column;gap:5px}
-.flabel{font-size:12px;font-weight:500;color:var(--text2);text-transform:uppercase;letter-spacing:0.5px}
-.finput,.fselect{padding:11px 14px;border:1.5px solid var(--border);border-radius:var(--rs);font-size:14px;font-family:'DM Sans',sans-serif;color:var(--text);background:var(--white);transition:border-color 0.2s;width:100%}
-.finput:focus,.fselect:focus{outline:none;border-color:var(--green-light);box-shadow:0 0 0 3px rgba(29,158,117,0.12)}
-.fhint{font-size:11px;color:var(--text3);margin-top:3px}
-.mpesa-block{background:var(--dark);color:#fff;border-radius:var(--r);padding:28px;margin-bottom:20px;position:relative;overflow:hidden}
-.mpesa-bg{position:absolute;top:-30px;right:-30px;width:180px;height:180px;border-radius:50%;background:rgba(29,158,117,0.15);pointer-events:none}
-.mpesa-title{font-family:'Sora',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px}
-.mpesa-sub{font-size:13px;color:rgba(255,255,255,0.6);margin-bottom:20px;line-height:1.55}
-.mpesa-steps{display:flex;flex-direction:column;gap:10px;margin-bottom:22px}
-.mpesa-step{display:flex;align-items:flex-start;gap:10px}
-.mpesa-step-num{width:22px;height:22px;border-radius:50%;background:rgba(29,158,117,0.3);color:#5DCAA5;font-size:11px;font-weight:700;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:1px}
-.mpesa-step-text{font-size:13px;color:rgba(255,255,255,0.8);line-height:1.5}
-.mpesa-step-text strong{color:#5DCAA5}
-.mpesa-amount-box{background:rgba(29,158,117,0.15);border:1px solid rgba(29,158,117,0.3);border-radius:var(--rs);padding:14px 18px;display:flex;justify-content:space-between;align-items:center;margin-bottom:20px}
-.mpesa-amount-label{font-size:12px;color:rgba(255,255,255,0.5)}
-.mpesa-amount-val{font-family:'Sora',sans-serif;font-size:24px;font-weight:800;color:#5DCAA5}
-.mpesa-number{font-family:'Sora',sans-serif;font-size:28px;font-weight:800;color:#fff;letter-spacing:2px;text-align:center;margin-bottom:6px}
-.mpesa-name{font-size:12px;color:rgba(255,255,255,0.5);text-align:center;margin-bottom:20px}
-.timer-block{display:flex;align-items:center;gap:8px;margin-bottom:16px}
-.timer-ring{width:40px;height:40px;position:relative;flex-shrink:0}
-.timer-ring svg{transform:rotate(-90deg)}
-.timer-ring .bg{fill:none;stroke:rgba(255,255,255,0.1);stroke-width:4}
-.timer-ring .fg{fill:none;stroke:#5DCAA5;stroke-width:4;stroke-linecap:round;transition:stroke-dashoffset 1s linear}
-.timer-num{position:absolute;inset:0;display:flex;align-items:center;justify-content:center;font-family:'Sora',sans-serif;font-size:11px;font-weight:700;color:#fff}
-.timer-text{font-size:13px;color:rgba(255,255,255,0.6)}
-.timer-text strong{color:#fff}
-.code-input-block{background:rgba(255,255,255,0.06);border:1.5px solid rgba(255,255,255,0.15);border-radius:var(--rs);padding:16px;margin-bottom:16px}
-.code-input-block label{font-size:11px;color:rgba(255,255,255,0.5);text-transform:uppercase;letter-spacing:0.5px;display:block;margin-bottom:8px}
-.code-input{width:100%;background:transparent;border:none;font-family:'Sora',sans-serif;font-size:22px;font-weight:700;color:#fff;letter-spacing:3px;text-transform:uppercase}
-.code-input::placeholder{color:rgba(255,255,255,0.2);letter-spacing:2px;font-size:16px}
-.code-input:focus{outline:none}
-.code-hint{font-size:11px;color:rgba(255,255,255,0.4);margin-top:6px}
-.btn{padding:12px 24px;border-radius:var(--rs);border:none;font-family:'Sora',sans-serif;font-size:14px;font-weight:600;cursor:pointer;transition:all 0.2s;display:inline-flex;align-items:center;gap:8px}
-.btn-green{background:var(--green);color:#fff}
-.btn-green:hover{background:var(--green-light)}
-.btn-outline{background:transparent;border:1.5px solid var(--border);color:var(--text2)}
-.btn-outline:hover{border-color:var(--green-light);color:var(--green)}
-.btn-full{width:100%;justify-content:center}
-.btn-wa{background:#25D366;color:#fff;font-size:13px;padding:9px 16px;border-radius:var(--rs);border:none;font-family:'Sora',sans-serif;font-weight:600;cursor:pointer;text-decoration:none;display:inline-flex;align-items:center;gap:6px}
-.btn-wa:hover{background:#128C7E}
-.btn-verify{background:var(--green);color:#fff;font-size:12px;padding:5px 12px;border-radius:6px;font-family:'Sora',sans-serif;font-weight:600;cursor:pointer;border:none}
-.btn-reject{background:var(--red-pale);color:var(--red);font-size:12px;padding:5px 12px;border-radius:6px;font-family:'Sora',sans-serif;font-weight:600;cursor:pointer;border:1px solid #F09595}
-.success-page{text-align:center;padding:48px 24px}
-.success-icon{width:72px;height:72px;background:var(--green);border-radius:50%;display:inline-flex;align-items:center;justify-content:center;font-size:32px;margin-bottom:20px}
-.success-page h2{font-family:'Sora',sans-serif;font-size:24px;font-weight:700;color:var(--dark);margin-bottom:8px}
-.success-page p{color:var(--text2);font-size:14px;max-width:400px;margin:0 auto 24px;line-height:1.65}
-.receipt{background:var(--surface);border:1px solid var(--border);border-radius:var(--r);padding:20px;max-width:400px;margin:0 auto 24px;text-align:left}
-.receipt-row{display:flex;justify-content:space-between;padding:7px 0;border-bottom:1px dashed var(--border);font-size:13px}
-.receipt-row:last-child{border-bottom:none;font-weight:600;font-size:14px}
-.receipt-row span:first-child{color:var(--text2)}
-.receipt-row span:last-child{color:var(--text);font-weight:500}
-.admin-filters{display:flex;gap:8px;margin-bottom:16px;flex-wrap:wrap}
-.filter-btn{padding:6px 14px;border-radius:99px;border:1.5px solid var(--border);background:transparent;font-size:12px;font-family:'Sora',sans-serif;font-weight:600;cursor:pointer;color:var(--text2);transition:all 0.15s}
-.filter-btn:hover,.filter-btn.on{border-color:var(--green);color:var(--green);background:var(--green-pale)}
-.tbl-wrap{overflow-x:auto}
-table{width:100%;border-collapse:collapse;font-size:13px}
-th{text-align:left;padding:10px 12px;color:var(--text2);font-size:11px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px;border-bottom:2px solid var(--border);background:var(--surface)}
-td{padding:10px 12px;border-bottom:1px solid var(--border);color:var(--text);vertical-align:middle}
-tr:hover td{background:#f8fdfb}
-.badge{display:inline-flex;align-items:center;gap:4px;padding:3px 9px;border-radius:99px;font-size:11px;font-weight:600;font-family:'Sora',sans-serif}
-.badge-green{background:var(--green-pale);color:var(--green)}
-.badge-amber{background:var(--amber-pale);color:var(--amber)}
-.badge-blue{background:var(--blue-pale);color:var(--blue)}
-.badge-red{background:var(--red-pale);color:var(--red)}
-.metric-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:12px;margin-bottom:24px}
-.metric{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:18px;text-align:center}
-.metric-val{font-family:'Sora',sans-serif;font-size:32px;font-weight:800;color:var(--dark)}
-.metric-lbl{font-size:12px;color:var(--text3);margin-top:4px}
-.metric.green .metric-val{color:var(--green)}
-.metric.amber .metric-val{color:var(--amber)}
-.metric.blue .metric-val{color:var(--blue)}
-.slot-monitor{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:24px}
-.slot-mon-card{background:var(--white);border:1px solid var(--border);border-radius:var(--r);padding:16px}
-.slot-mon-title{font-family:'Sora',sans-serif;font-size:13px;font-weight:700;color:var(--dark);margin-bottom:4px}
-.slot-mon-meta{font-size:11px;color:var(--text3);margin-bottom:8px}
-.sbar{height:6px;border-radius:3px;background:var(--border);overflow:hidden}
-.sbar-fill{height:100%;border-radius:3px;background:var(--green);transition:width 0.5s}
-.sbar-fill.warn{background:var(--amber-mid)}
-.sbar-fill.full{background:#E24B4A}
-.notice{display:flex;gap:10px;padding:14px 16px;border-radius:var(--rs);font-size:13px;margin-bottom:16px;line-height:1.5}
-.notice-green{background:var(--green-pale);border:1px solid #9FE1CB;color:#0F6E56}
-.notice-amber{background:var(--amber-pale);border:1px solid #FAC775;color:#854F0B}
-.notice-icon{font-size:16px;flex-shrink:0;margin-top:1px}
-.pay-method-grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-bottom:20px}
-.pay-method-card{background:var(--white);border:2px solid var(--border);border-radius:var(--r);padding:24px 18px;cursor:pointer;transition:all 0.2s;text-align:center}
-.pay-method-card:hover{border-color:var(--green-light);transform:translateY(-2px);box-shadow:0 8px 24px rgba(15,110,86,0.1)}
-.pm-icon{font-size:32px;margin-bottom:10px}
-.pm-name{font-family:'Sora',sans-serif;font-weight:700;font-size:16px;color:var(--dark);margin-bottom:6px}
-.pm-desc{font-size:12px;color:var(--text2);line-height:1.5;margin-bottom:12px}
-.pm-badge{display:inline-block;padding:3px 10px;border-radius:99px;font-size:10px;font-weight:600;text-transform:uppercase;letter-spacing:0.5px}
-.pm-badge-green{background:var(--green-pale);color:var(--green)}
-.pm-badge-blue{background:var(--blue-pale);color:var(--blue)}
-footer{background:var(--dark);color:rgba(255,255,255,0.5);text-align:center;padding:20px;font-size:12px}
-footer a{color:#5DCAA5;text-decoration:none}
-.modal-overlay{display:none;position:fixed;inset:0;background:rgba(0,0,0,0.55);z-index:999;align-items:center;justify-content:center}
-.modal-overlay.show{display:flex}
-.modal-box{background:var(--white);border-radius:var(--r);padding:32px;width:340px;max-width:90vw}
-@media(max-width:600px){
-  .form-row{grid-template-columns:1fr}
-  .hero h1{font-size:28px}
-  .hero-stats{gap:20px}
-  .stat-num{font-size:22px}
-  .mode-grid{grid-template-columns:1fr}
-  .stepper{gap:2px}
-  .step-label{font-size:10px}
-}
-</style>
-<script src="https://www.paypal.com/sdk/js?client-id=BAAqzwEDIN4gE7FNBHe98L6QQ-f3hX2aCDmdZVVHn6v2lZdkf-9trEMSEy4YwtSg5ge08MZwU3IseWCTzA&components=hosted-buttons&disable-funding=venmo&currency=USD"></script>
-</head>
-<body>
+<div align="center">
 
-<nav>
-  <div class="nav-inner">
-    <div class="nav-logo"><span>NextGen</span> Digital Skills Hub</div>
-    <button class="nav-btn active" id="nav-enroll" onclick="showPage('enroll')">Enroll Now</button>
-    <button class="nav-btn" id="nav-courses" onclick="showPage('courses')">Courses</button>
-    <button class="nav-btn nav-admin" onclick="openAdminModal()">Admin ▸</button>
-  </div>
-</nav>
+# NETGEN-HUB
 
-<div id="hero-wrap">
-<div class="hero">
-  <div class="hero-bg"></div>
-  <div class="hero-inner">
-    <div class="hero-badge">💻 100% Online Courses</div>
-    <h1>Master In-Demand<br><span>Digital Skills</span></h1>
-    <p>Learn from anywhere. Professional courses in Computer Packages, Coding, AI, Data Analysis, Cybersecurity, Digital Marketing, and more — delivered fully online, with real support from our office at La Serene, Kericho. Certificate awarded on completion.</p>
-    <div class="hero-courses">
-      <span class="hc-pill">💻 Computer Packages</span>
-      <span class="hc-pill">🌐 Web Dev</span>
-      <span class="hc-pill">🐍 Python</span>
-      <span class="hc-pill">🤖 AI Fundamentals</span>
-      <span class="hc-pill">📈 Power BI</span>
-      <span class="hc-pill">📉 Tableau</span>
-      <span class="hc-pill">🔐 Cybersecurity</span>
-      <span class="hc-pill">📱 Digital Marketing</span>
-      <span class="hc-pill">🗄️ SQL</span>
-      <span class="hc-pill">📋 Project Management</span>
-      <span class="hc-pill">✍️ Freelancing</span>
-    </div>
-    <button class="hero-cta" onclick="scrollToForm()">Register Now — It Takes 3 Minutes →</button>
-    <div class="hero-stats">
-      <div><div class="stat-num">12</div><div class="stat-lbl">Courses Available</div></div>
-      <div><div class="stat-num">Ksh 2K</div><div class="stat-lbl">Starting Price</div></div>
-      <div><div class="stat-num">100%</div><div class="stat-lbl">Certificate Awarded</div></div>
-      <div><div class="stat-num">5</div><div class="stat-lbl">Daily Time Slots</div></div>
-    </div>
-  </div>
-</div>
+**Generate, visualize, and analyze networks, right in your browser.**
+
+[![Live Demo](https://img.shields.io/badge/Live%20Demo-Open%20App-2ea44f?style=for-the-badge)](https://ronnice-chepkoech.github.io/NETGEN-HUB/)
+[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)](LICENSE)
+![Built with](https://img.shields.io/badge/Built%20with-HTML%20%7C%20CSS%20%7C%20JavaScript-orange?style=for-the-badge)
+
+[**Launch the App**](https://ronnice-chepkoech.github.io/NETGEN-HUB/) · [**Report a Bug**](../../issues) · [**Request a Feature**](../../issues)
+
 </div>
 
-<!-- ENROLL PAGE -->
-<div id="page-enroll" class="page show">
-  <div id="form-top" style="scroll-margin-top:70px">
-    <div class="stepper" id="stepper" style="max-width:680px;margin:0 auto 32px">
-      <div class="step-item">
-        <div class="step-dot active" id="dot-1">1</div>
-        <div class="step-label active" id="lbl-1">Choose Course</div>
-      </div>
-      <div class="step-line" id="line-1"></div>
-      <div class="step-item">
-        <div class="step-dot idle" id="dot-2">2</div>
-        <div class="step-label" id="lbl-2">Your Details</div>
-      </div>
-      <div class="step-line" id="line-2"></div>
-      <div class="step-item">
-        <div class="step-dot idle" id="dot-3">3</div>
-        <div class="step-label" id="lbl-3">Payment</div>
-      </div>
-      <div class="step-line" id="line-3"></div>
-      <div class="step-item">
-        <div class="step-dot idle" id="dot-4">4</div>
-        <div class="step-label" id="lbl-4">Confirm</div>
-      </div>
-    </div>
+---
 
-    <!-- STEP 1 -->
-    <div class="step-panel show" id="sp-1" style="max-width:820px;margin:0 auto">
-      <div class="sec-hdr"><h2>Choose Your Course</h2><p>Select the course, time slot, and learning mode</p></div>
-      <div class="course-grid">
-        <div class="course-card" id="cc-0" onclick="selectCourse(0,'Computer Packages',2000,'1 month')">
-          <div class="course-icon">💻</div>
-          <div class="course-name">Computer Packages</div>
-          <div class="course-desc">Word, Excel, PowerPoint, Email, printing &amp; photocopy, Internet &amp; Typing</div>
-          <div class="course-meta"><div class="course-price">Ksh 2,000</div><div class="course-dur">1 month</div></div>
-        </div>
-        <div class="course-card" id="cc-1" onclick="selectCourse(1,'Coding for Beginners',4000,'3 months')">
-          <div class="course-icon">🖥️</div>
-          <div class="course-name">Coding for Beginners</div>
-          <div class="course-desc">Choose your track: Web Dev (HTML/CSS/JS), C/C++ Foundations, or Python Programming</div>
-          <div class="course-meta"><div class="course-price">Ksh 4,000</div><div class="course-dur">3 months</div></div>
-          <select class="track-select" id="track-sel" onclick="event.stopPropagation()" onchange="setTrack(this.value)">
-            <option value="">— Select Track —</option>
-            <option value="Track 1: Web Dev (HTML/CSS/JS)">Track 1: Web Dev — HTML, CSS, JavaScript</option>
-            <option value="Track 2: C/C++ Foundations">Track 2: C, C++ Foundations</option>
-            <option value="Track 3: Python Programming">Track 3: Python Programming</option>
-          </select>
-        </div>
-        <div class="course-card" id="cc-2" onclick="selectCourse(2,'Online Writing &amp; Freelancing',2500,'1 month')">
-          <div class="course-icon">✍️</div>
-          <div class="course-name">Online Writing &amp; Freelancing</div>
-          <div class="course-desc">Academic writing, SEO, Blogging, AI Tools, Upwork &amp; Fiverr — Start earning online</div>
-          <div class="course-meta"><div class="course-price">Ksh 2,500</div><div class="course-dur">1 month</div></div>
-        </div>
-        <div class="course-card" id="cc-3" onclick="selectCourse(3,'AI Fundamentals',2600,'1 month')">
-          <div class="course-icon">🤖</div>
-          <div class="course-name">AI Fundamentals</div>
-          <div class="course-desc">ChatGPT &amp; AI tools, prompt writing, AI for work and income — no tech background needed</div>
-          <div class="course-meta"><div class="course-price">Ksh 2,600</div><div class="course-dur">1 month</div></div>
-        </div>
-        <div class="course-card" id="cc-4" onclick="selectCourse(4,'Advanced Excel',2000,'1 month')">
-          <div class="course-icon">📊</div>
-          <div class="course-name">Advanced Excel</div>
-          <div class="course-desc">Pivot tables, advanced formulas, Power Query, dashboards — take your Excel skills further</div>
-          <div class="course-meta"><div class="course-price">Ksh 2,000</div><div class="course-dur">1 month</div></div>
-        </div>
-        <div class="course-card" id="cc-5" onclick="selectCourse(5,'Power BI',3000,'2 months')">
-          <div class="course-icon">📈</div>
-          <div class="course-name">Power BI</div>
-          <div class="course-desc">Build interactive dashboards, data modeling, DAX formulas — in-demand business intelligence skill</div>
-          <div class="course-meta"><div class="course-price">Ksh 3,000</div><div class="course-dur">2 months</div></div>
-        </div>
-        <div class="course-card" id="cc-6" onclick="selectCourse(6,'Tableau',3000,'2 months')">
-          <div class="course-icon">📉</div>
-          <div class="course-name">Tableau</div>
-          <div class="course-desc">Data visualization, interactive dashboards, storytelling with data — a leading BI tool</div>
-          <div class="course-meta"><div class="course-price">Ksh 3,000</div><div class="course-dur">2 months</div></div>
-        </div>
-        <div class="course-card" id="cc-7" onclick="selectCourse(7,'SPSS',3000,'1.5 months')">
-          <div class="course-icon">📐</div>
-          <div class="course-name">SPSS</div>
-          <div class="course-desc">Statistical analysis for research, surveys &amp; academic work — widely used in data analysis</div>
-          <div class="course-meta"><div class="course-price">Ksh 3,000</div><div class="course-dur">1.5 months</div></div>
-        </div>
-        <div class="course-card" id="cc-8" onclick="selectCourse(8,'Cybersecurity Fundamentals',3500,'2 months')">
-          <div class="course-icon">🔐</div>
-          <div class="course-name">Cybersecurity Fundamentals</div>
-          <div class="course-desc">Phishing, network safety, password security, cyber threats — essential for every employee and business</div>
-          <div class="course-meta"><div class="course-price">Ksh 3,500</div><div class="course-dur">2 months</div></div>
-        </div>
-        <div class="course-card" id="cc-9" onclick="selectCourse(9,'Digital Marketing & Social Media',3000,'1.5 months')">
-          <div class="course-icon">📱</div>
-          <div class="course-name">Digital Marketing &amp; Social Media</div>
-          <div class="course-desc">SEO, social media strategy, content creation, Google Ads basics — grow any business online</div>
-          <div class="course-meta"><div class="course-price">Ksh 3,000</div><div class="course-dur">1.5 months</div></div>
-        </div>
-        <div class="course-card" id="cc-10" onclick="selectCourse(10,'SQL for Beginners',3000,'1 month')">
-          <div class="course-icon">🗄️</div>
-          <div class="course-name">SQL for Beginners</div>
-          <div class="course-desc">Query databases, filter and join data — the essential skill that pairs with Power BI, Tableau &amp; data analysis</div>
-          <div class="course-meta"><div class="course-price">Ksh 3,000</div><div class="course-dur">1 month</div></div>
-        </div>
-        <div class="course-card" id="cc-11" onclick="selectCourse(11,'Project Management Fundamentals',3500,'2 months')">
-          <div class="course-icon">📋</div>
-          <div class="course-name">Project Management Fundamentals</div>
-          <div class="course-desc">Planning, scheduling, risk management, Agile &amp; Scrum basics — cross-industry, in demand everywhere</div>
-          <div class="course-meta"><div class="course-price">Ksh 3,500</div><div class="course-dur">2 months</div></div>
-        </div>
-        <div class="course-card" id="cc-12" onclick="selectCourse(12,'Java Programming',4000,'3 months')">
-          <div class="course-icon">☕</div>
-          <div class="course-name">Java Programming</div>
-          <div class="course-desc">Object-oriented programming, Java syntax, data structures &amp; building real applications — widely used in enterprise software &amp; Android development</div>
-          <div class="course-meta"><div class="course-price">Ksh 4,000</div><div class="course-dur">3 months</div></div>
-        </div>
-      </div>
+## About
 
-      <div class="sec-hdr"><h2>Preferred Time Slot</h2><p>Max 10 students per slot. Choose one that works for you.</p></div>
-      <div class="slot-grid" id="slot-grid"></div>
+NETGEN-HUB is a lightweight, web-based platform that simplifies the creation, visualization, and analysis of complex networks. It offers an intuitive interface for generating network structures and exploring their properties, supporting research, teaching, and data-driven decision-making.
 
-      <div class="sec-hdr" style="margin-top:4px"><h2>Class Schedule</h2><p>All classes are 100% online via WhatsApp &amp; video — choose what fits your routine</p></div>
-      <div class="mode-grid">
-        <div class="mode-card" onclick="selectMode(this,'Full-time')"><div class="mode-icon">💻</div><div><div class="mode-name">Full-time</div><div style="font-size:11px;color:var(--text3)">Mon–Fri, 1hr daily online</div></div></div>
-        <div class="mode-card" onclick="selectMode(this,'Part-time')"><div class="mode-icon">🕐</div><div><div class="mode-name">Part-time</div><div style="font-size:11px;color:var(--text3)">Flexible online schedule</div></div></div>
-        <div class="mode-card" onclick="selectMode(this,'Weekend')"><div class="mode-icon">📅</div><div><div class="mode-name">Weekend</div><div style="font-size:11px;color:var(--text3)">Sat &amp; Sun, online</div></div></div>
-        <div class="mode-card" onclick="selectMode(this,'Self-paced')"><div class="mode-icon">🌐</div><div><div class="mode-name">Self-paced</div><div style="font-size:11px;color:var(--text3)">Learn anytime, online</div></div></div>
-      </div>
-      <div style="display:flex;justify-content:flex-end">
-        <button class="btn btn-green" onclick="goStep2()">Continue to Your Details →</button>
-      </div>
-    </div>
+There is nothing to install: open the link and start building.
 
-    <!-- STEP 2 -->
-    <div class="step-panel" id="sp-2" style="max-width:600px;margin:0 auto">
-      <div class="sec-hdr"><h2>Your Details</h2><p>We'll use this to confirm your registration — by WhatsApp or email</p></div>
-      <div class="card" style="margin-bottom:20px">
-        <div class="form-row one">
-          <div class="fgroup">
-            <label class="flabel">Full Name</label>
-            <input class="finput" id="inp-name" type="text" placeholder="e.g. Jane Wanjiku">
-          </div>
-        </div>
-        <div class="form-row">
-          <div class="fgroup">
-            <label class="flabel">Phone Number</label>
-            <input class="finput" id="inp-phone" type="tel" placeholder="e.g. +254712345678 or +1 415 555 0123">
-            <div class="fhint">Any country. Include country code (e.g. +254, +1, +44).</div>
-          </div>
-          <div class="fgroup">
-            <label class="flabel">Email Address</label>
-            <input class="finput" id="inp-email" type="email" placeholder="your@email.com">
-            <div class="fhint">Required if you don't use WhatsApp</div>
-          </div>
-        </div>
-        <div class="fgroup" style="margin-top:6px">
-          <label style="display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);cursor:pointer">
-            <input type="checkbox" id="inp-has-whatsapp" checked onchange="toggleWhatsappReq()" style="width:16px;height:16px;cursor:pointer">
-            This number has WhatsApp
-          </label>
-        </div>
-      </div>
-      <div class="card-green" style="margin-bottom:20px">
-        <div style="font-size:13px;color:var(--green);font-weight:600;margin-bottom:8px">📋 Enrollment Summary</div>
-        <div id="summary-box" style="font-size:13px;color:#0F6E56;line-height:2"></div>
-      </div>
-      <div style="display:flex;gap:10px;justify-content:space-between">
-        <button class="btn btn-outline" onclick="goStep(1)">← Back</button>
-        <button class="btn btn-green" onclick="goStep3()">Continue to Payment →</button>
-      </div>
-    </div>
+<!-- Add a screenshot or GIF of the app here:
+![NETGEN-HUB screenshot](docs/screenshot.png)
+-->
 
-    <!-- STEP 3: PAYMENT METHOD CHOICE -->
-    <div class="step-panel" id="sp-3" style="max-width:600px;margin:0 auto">
-      <div class="sec-hdr"><h2>Choose Payment Method</h2><p>Select how you'd like to pay for your course</p></div>
-      <div class="pay-method-grid">
-        <div class="pay-method-card" onclick="choosePayMethod('mpesa')">
-          <div class="pm-icon">📱</div>
-          <div class="pm-name">M-Pesa</div>
-          <div class="pm-desc">For students in Kenya — pay in Kenyan Shillings</div>
-          <div class="pm-badge pm-badge-green">Recommended for Kenya</div>
-        </div>
-        <div class="pay-method-card" onclick="choosePayMethod('paypal')">
-          <div class="pm-icon">🌍</div>
-          <div class="pm-name">PayPal / Card</div>
-          <div class="pm-desc">For international students — pay in USD via PayPal or Debit/Credit Card</div>
-          <div class="pm-badge pm-badge-blue">International</div>
-        </div>
-      </div>
-      <div style="display:flex;gap:10px;justify-content:space-between;margin-top:8px">
-        <button class="btn btn-outline" onclick="goStep(2)">← Back</button>
-      </div>
-    </div>
+## Features
 
-    <!-- STEP 3A: MPESA -->
-    <div class="step-panel" id="sp-3a" style="max-width:600px;margin:0 auto">
-      <div class="sec-hdr"><h2>Pay via M-Pesa</h2><p>You must complete payment and enter the confirmation code to finish registration</p></div>
-      <div class="mpesa-block">
-        <div class="mpesa-bg"></div>
-        <div class="mpesa-title">💚 M-Pesa Payment Instructions</div>
-        <div class="mpesa-sub">Pay via Paybill using the details below, then enter the M-Pesa SMS code to unlock your enrollment.</div>
-        <div class="mpesa-amount-box">
-          <div><div class="mpesa-amount-label">Amount to Pay</div><div class="mpesa-amount-val" id="pay-amount">Ksh 0</div></div>
-          <div style="text-align:right"><div class="mpesa-amount-label">Course</div><div style="font-size:12px;color:#fff;font-weight:500;max-width:150px;text-align:right" id="pay-course">—</div></div>
-        </div>
-        <div class="mpesa-number">247247</div>
-        <div class="mpesa-name">Paybill Number</div>
-        <div class="mpesa-number" style="font-size:20px;margin-top:-8px">0790178753344</div>
-        <div class="mpesa-name">Account Number — NextGen Digital Skills Hub</div>
-        <div class="mpesa-steps">
-          <div class="mpesa-step"><div class="mpesa-step-num">1</div><div class="mpesa-step-text">Open <strong>M-Pesa</strong> on your phone</div></div>
-          <div class="mpesa-step"><div class="mpesa-step-num">2</div><div class="mpesa-step-text">Select <strong>Lipa na M-Pesa → Pay Bill</strong></div></div>
-          <div class="mpesa-step"><div class="mpesa-step-num">3</div><div class="mpesa-step-text">Enter Business Number: <strong>247247</strong></div></div>
-          <div class="mpesa-step"><div class="mpesa-step-num">4</div><div class="mpesa-step-text">Enter Account Number: <strong>0790178753344</strong></div></div>
-          <div class="mpesa-step"><div class="mpesa-step-num">5</div><div class="mpesa-step-text">Enter amount: <strong id="pay-amount-2">Ksh 0</strong> exactly</div></div>
-          <div class="mpesa-step"><div class="mpesa-step-num">6</div><div class="mpesa-step-text">Enter your <strong>M-Pesa PIN</strong> and confirm</div></div>
-          <div class="mpesa-step"><div class="mpesa-step-num">7</div><div class="mpesa-step-text">You'll get an SMS with a code like <strong>QHT8F2XKPL</strong> — enter it below</div></div>
-        </div>
-        <div class="timer-block">
-          <div class="timer-ring">
-            <svg width="40" height="40" viewBox="0 0 40 40">
-              <circle class="bg" cx="20" cy="20" r="16"/>
-              <circle class="fg" id="timer-circle" cx="20" cy="20" r="16" stroke-dasharray="100.5" stroke-dashoffset="0"/>
-            </svg>
-            <div class="timer-num" id="timer-num">15</div>
-          </div>
-          <div class="timer-text">Complete payment within <strong id="timer-display">15:00</strong></div>
-        </div>
-        <div class="code-input-block">
-          <label>Enter M-Pesa Confirmation Code</label>
-          <input class="code-input" id="mpesa-code" type="text" maxlength="12" placeholder="e.g. QHT8F2XKPL" oninput="this.value=this.value.toUpperCase().replace(/[^A-Z0-9]/g,'')">
-          <div class="code-hint">The code is in the SMS M-Pesa sent you after payment. 10 alphanumeric characters.</div>
-        </div>
-      </div>
-      <div class="notice notice-amber">
-        <div class="notice-icon">⚠️</div>
-        <div><strong>Registration is only completed after entering your M-Pesa code.</strong> No code = no enrollment. Do not close this page before submitting.</div>
-      </div>
-      <div style="display:flex;gap:10px;justify-content:space-between">
-        <button class="btn btn-outline" onclick="goStep(3)">← Back</button>
-        <button class="btn btn-green" onclick="goStep4()">I've Paid — Submit My Code →</button>
-      </div>
-    </div>
+| | |
+|---|---|
+| **Network generation** | Create different network structures with customizable layouts and scalable models |
+| **Interactive visualization** | Explore dynamic graphs with clear node and edge representation |
+| **Network analysis** | Examine structure, connectivity, and topology |
+| **Browser-based** | No installation, works in any modern browser, responsive layout |
 
-    <!-- STEP 3B: PAYPAL -->
-    <div class="step-panel" id="sp-3b" style="max-width:600px;margin:0 auto">
-      <div class="sec-hdr"><h2>Pay via PayPal / Card</h2><p>Complete payment below, then continue to confirm your registration</p></div>
-      <div class="card-green" style="margin-bottom:16px">
-        <div style="font-size:13px;color:var(--green);font-weight:600;margin-bottom:6px">💳 Amount Due</div>
-        <div style="font-size:28px;font-weight:700;color:var(--green)" id="pp-amount">$0 USD</div>
-        <div style="font-size:12px;color:var(--text2);margin-top:2px" id="pp-course">—</div>
-      </div>
-      <div class="card" style="margin-bottom:16px;text-align:center;padding:24px 20px">
-        <div id="pp-button-slot" style="min-height:60px;width:100%;max-width:320px;margin:0 auto;display:block">
-          <div style="color:var(--text3);font-size:13px">Select a course in step 1 to load payment button</div>
-        </div>
-      </div>
-      <div class="notice notice-amber">
-        <div class="notice-icon">⚠️</div>
-        <div><strong>After paying, click "I've Paid" below.</strong> Admin will verify your PayPal transaction and confirm via WhatsApp.</div>
-      </div>
-      <div style="display:flex;gap:10px;justify-content:space-between">
-        <button class="btn btn-outline" onclick="goStep(3)">← Back</button>
-        <button class="btn btn-green" onclick="goStep4Paypal()">I've Paid via PayPal →</button>
-      </div>
-    </div>
+## Who It's For
 
-    <!-- STEP 4: SUCCESS -->
-    <div class="step-panel" id="sp-4" style="max-width:560px;margin:0 auto">
-      <div class="success-page">
-        <div class="success-icon">✓</div>
-        <h2>Registration Submitted!</h2>
-        <p id="success-sub">Your payment details have been recorded. Admin will verify and send a confirmation shortly.</p>
-        <div class="receipt" id="receipt-box"></div>
-        <div class="notice notice-green" style="max-width:420px;margin:0 auto 20px;text-align:left">
-          <div class="notice-icon" id="conf-icon">💬</div>
-          <div id="conf-notice-text">A confirmation will be sent to <strong id="conf-phone">your number</strong> once your payment is verified by admin.</div>
-        </div>
-        <div style="display:flex;gap:10px;justify-content:center;flex-wrap:wrap">
-          <a id="wa-share" class="btn-wa" href="#" target="_blank">📲 Send Self WhatsApp Reminder</a>
-          <button class="btn btn-outline" onclick="newReg()">Register Another Student</button>
-        </div>
-      </div>
-    </div>
-  </div>
+Researchers, students, educators, engineers, data scientists, network analysts, and decision makers.
+
+## Applications
+
+- Network science
+- Climate and environmental systems
+- Infrastructure planning
+- Transport networks
+- Energy systems
+- Water resources
+- Social network analysis
+- Academic research and teaching
+
+## Getting Started
+
+### Use online
+
+Open **[ronnice-chepkoech.github.io/NETGEN-HUB](https://ronnice-chepkoech.github.io/NETGEN-HUB/)**. No setup required.
+
+### Run locally
+
+```bash
+git clone https://github.com/ronnice-chepkoech/NETGEN-HUB.git
+cd NETGEN-HUB
+# Open index.html in your browser
+```
+
+## Tech Stack
+
+- HTML5
+- CSS3
+- JavaScript
+- GitHub Pages (hosting)
+
+## Roadmap
+
+- [ ] Advanced network analytics
+- [ ] Export to multiple formats
+- [ ] AI-assisted network optimization
+- [ ] Additional visualization options
+- [ ] Better performance on large networks
+- [ ] Integration with external datasets
+
+Have an idea? [Open an issue](../../issues) and let's discuss it.
+
+## Contributing
+
+Contributions are welcome.
+
+1. Fork the repository
+2. Create a branch: `git checkout -b feature/your-feature`
+3. Commit your changes: `git commit -m "Add your feature"`
+4. Push the branch: `git push origin feature/your-feature`
+5. Open a pull request
+
+
+
+## Author
+
+**Ronnice Chepkoech**
+
+Developer of NETGEN-HUB
+
+---
+
+<div align="center">
+
+If you find NETGEN-HUB useful, consider giving it a star. ⭐
+
 </div>
-
-<!-- COURSES PAGE -->
-<div id="page-courses" class="page">
-  <div class="sec-hdr"><h2>All Courses</h2><p>Certificate awarded on completion · Multiple time slots available daily</p></div>
-  <div class="course-grid" style="max-width:900px">
-    <div class="card"><div class="course-icon" style="font-size:24px">💻</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Computer Packages</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Word, Excel, PowerPoint, Email, printing &amp; photocopy, Internet &amp; Typing</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 2,000</div><div class="course-dur">1 month</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">🖥️</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Coding for Beginners</div><ul style="font-size:12px;color:var(--text2);padding-left:16px;margin-bottom:12px;line-height:1.9"><li>Track 1: Web Dev — HTML, CSS, JavaScript</li><li>Track 2: C, C++ Foundations</li><li>Track 3: Python Programming</li></ul><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 4,000/track</div><div class="course-dur">3 months</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">✍️</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Online Writing &amp; Freelancing</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Academic writing, SEO, Blogging, AI Tools, Upwork &amp; Fiverr</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 2,500</div><div class="course-dur">1 month</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">🤖</div><div class="course-name" style="font-size:17px;margin-bottom:8px">AI Fundamentals</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">ChatGPT &amp; AI tools, prompt writing, AI for work and income — no tech background needed</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 2,600</div><div class="course-dur">1 month</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">📊</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Advanced Excel</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Pivot tables, advanced formulas, Power Query, dashboards — take your Excel skills further</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 2,000</div><div class="course-dur">1 month</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">📈</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Power BI</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Build interactive dashboards, data modeling, DAX formulas — in-demand business intelligence skill</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,000</div><div class="course-dur">2 months</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">📉</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Tableau</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Data visualization, interactive dashboards, storytelling with data — a leading BI tool</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,000</div><div class="course-dur">2 months</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">📐</div><div class="course-name" style="font-size:17px;margin-bottom:8px">SPSS</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Statistical analysis for research, surveys &amp; academic work — widely used in data analysis</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,000</div><div class="course-dur">1.5 months</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">🔐</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Cybersecurity Fundamentals</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Phishing, network safety, password security, cyber threats — essential for every employee and business</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,500</div><div class="course-dur">2 months</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">📱</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Digital Marketing &amp; Social Media</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">SEO, social media strategy, content creation, Google Ads basics — grow any business online</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,000</div><div class="course-dur">1.5 months</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">🗄️</div><div class="course-name" style="font-size:17px;margin-bottom:8px">SQL for Beginners</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Query databases, filter and join data — the essential skill that pairs with Power BI, Tableau &amp; data analysis</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,000</div><div class="course-dur">1 month</div></div></div>
-    <div class="card"><div class="course-icon" style="font-size:24px">📋</div><div class="course-name" style="font-size:17px;margin-bottom:8px">Project Management Fundamentals</div><p style="font-size:13px;color:var(--text2);line-height:1.6;margin-bottom:12px">Planning, scheduling, risk management, Agile &amp; Scrum basics — cross-industry, in demand everywhere</p><div style="display:flex;justify-content:space-between;align-items:center"><div class="course-price">Ksh 3,500</div><div class="course-dur">2 months</div></div></div>
-  </div>
-  <div class="card" style="max-width:600px;margin-top:16px">
-    <div style="font-weight:600;font-family:'Sora',sans-serif;margin-bottom:6px">Schedule &amp; Options</div>
-    <p style="font-size:12px;color:var(--text2);margin-bottom:14px">All courses are delivered 100% online — no need to travel. Pick the pace that fits your routine.</p>
-    <div style="display:flex;flex-wrap:wrap;gap:8px;font-size:13px;margin-bottom:14px">
-      <span style="background:var(--surface);padding:6px 12px;border-radius:var(--rs);border:1px solid var(--border)">Full-time (Mon–Fri, online)</span>
-      <span style="background:var(--surface);padding:6px 12px;border-radius:var(--rs);border:1px solid var(--border)">Part-time, online</span>
-      <span style="background:var(--surface);padding:6px 12px;border-radius:var(--rs);border:1px solid var(--border)">Weekend classes, online</span>
-      <span style="background:var(--surface);padding:6px 12px;border-radius:var(--rs);border:1px solid var(--border)">Self-paced, online</span>
-      <span style="background:var(--green-pale);padding:6px 12px;border-radius:var(--rs);border:1px solid #9FE1CB;color:var(--green)">Certificate Awarded</span>
-    </div>
-    <div style="padding-top:14px;border-top:1px solid var(--border)">
-      <div style="font-size:12px;color:var(--text2);font-weight:600;margin-bottom:2px">Our Office (for support &amp; walk-ins)</div>
-      <div style="font-size:12px;color:var(--text2)">📍 Opposite La Serene, along the Kericho–Kisumu Highway</div>
-      <div style="font-size:13px;color:var(--green);margin-top:6px;font-weight:600">📞 Call/WhatsApp: 0722216356</div>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN PAGE -->
-<div id="page-admin" class="page">
-  <div style="display:flex;align-items:center;justify-content:space-between;margin-bottom:24px;flex-wrap:wrap;gap:12px">
-    <div class="sec-hdr" style="margin-bottom:0"><h2>Admin Dashboard</h2><p>Verify payments and send WhatsApp confirmations</p></div>
-    <div style="display:flex;gap:8px">
-      <button class="btn btn-outline" style="font-size:12px;padding:8px 14px" onclick="exportCSV()">⬇ Export CSV</button>
-      <button class="btn btn-outline" style="font-size:12px;padding:8px 14px;color:var(--red);border-color:#F09595" onclick="adminLogout()">Logout</button>
-    </div>
-  </div>
-  <div class="metric-grid" id="admin-metrics"></div>
-  <div class="slot-monitor" id="slot-monitor"></div>
-  <div class="card">
-    <div class="admin-filters">
-      <button class="filter-btn on" onclick="setFilter('all',this)">All</button>
-      <button class="filter-btn" onclick="setFilter('pending',this)">Pending</button>
-      <button class="filter-btn" onclick="setFilter('verified',this)">Verified</button>
-      <button class="filter-btn" onclick="setFilter('sent',this)">WA Sent</button>
-    </div>
-    <div class="tbl-wrap">
-      <table>
-        <thead><tr><th>#</th><th>Name</th><th>Phone</th><th>Course</th><th>Slot</th><th>Mode</th><th>Method</th><th>Code / Amount</th><th>Registered</th><th>Status</th><th>Actions</th></tr></thead>
-        <tbody id="admin-tbody"></tbody>
-      </table>
-    </div>
-  </div>
-</div>
-
-<!-- ADMIN MODAL -->
-<div class="modal-overlay" id="admin-modal">
-  <div class="modal-box">
-    <div style="font-family:'Sora',sans-serif;font-size:18px;font-weight:700;margin-bottom:6px">🔐 Admin Access</div>
-    <div style="font-size:13px;color:var(--text2);margin-bottom:20px">Enter admin password to view the dashboard</div>
-    <input class="finput" type="password" id="admin-pass" placeholder="Password" style="margin-bottom:12px" onkeydown="if(event.key==='Enter')checkAdmin()">
-    <div style="display:flex;gap:8px">
-      <button class="btn btn-green" style="flex:1" onclick="checkAdmin()">Enter Dashboard</button>
-      <button class="btn btn-outline" onclick="closeAdminModal()">Cancel</button>
-    </div>
-    <div id="admin-err" style="color:var(--red);font-size:12px;margin-top:10px;display:none">❌ Incorrect password. Try again.</div>
-  </div>
-</div>
-
-<footer>
-  <div>NextGen Digital Skills Hub &nbsp;·&nbsp; 💻 100% Online Courses &nbsp;·&nbsp; 📍 Office: Opposite La Serene, Kericho–Kisumu Highway</div>
-  <div style="margin-top:6px">📞 Call/WhatsApp: <a href="tel:+254722216356">0722216356</a> &nbsp;·&nbsp; Full-time | Part-time | Weekend | Self-paced | Certificate Awarded</div>
-</footer>
-
-<script>
-// ── DATA ──
-var ADMIN_PASS = 'nextgen2024';
-var slots = {'8–9 AM':10,'10–11 AM':10,'2–3 PM':10,'6–7 PM':10,'Saturday 9 AM':8};
-var students = JSON.parse(localStorage.getItem('ng_students')||'[]');
-var st = {courseName:'',coursePrice:0,courseDuration:'',track:'',slot:'',mode:'',name:'',phone:'',email:'',mpesaCode:'',hasWhatsapp:true};
-var timerInt = null, timerSecs = 900;
-var adminFilter = 'all';
-
-function save(){ localStorage.setItem('ng_students', JSON.stringify(students)); }
-
-// ── PAGES ──
-function showPage(p){
-  ['enroll','courses','admin'].forEach(function(x){ document.getElementById('page-'+x).classList.remove('show'); });
-  document.getElementById('page-'+p).classList.add('show');
-  ['enroll','courses'].forEach(function(x){ var b=document.getElementById('nav-'+x); if(b) b.classList.remove('active'); });
-  if(document.getElementById('nav-'+p)) document.getElementById('nav-'+p).classList.add('active');
-  document.getElementById('hero-wrap').style.display = (p==='enroll') ? 'block' : 'none';
-  if(p==='admin') renderAdmin();
-}
-function scrollToForm(){ document.getElementById('form-top').scrollIntoView({behavior:'smooth'}); }
-function openAdminModal(){ document.getElementById('admin-modal').classList.add('show'); setTimeout(function(){document.getElementById('admin-pass').focus();},100); }
-function closeAdminModal(){ document.getElementById('admin-modal').classList.remove('show'); document.getElementById('admin-pass').value=''; document.getElementById('admin-err').style.display='none'; }
-function checkAdmin(){
-  if(document.getElementById('admin-pass').value===ADMIN_PASS){
-    closeAdminModal(); showPage('admin');
-  } else { document.getElementById('admin-err').style.display='block'; }
-}
-function adminLogout(){ showPage('enroll'); }
-
-// ── SLOT RENDERING ──
-function renderSlots(){
-  var g=document.getElementById('slot-grid'); g.innerHTML='';
-  Object.keys(slots).forEach(function(s){
-    var lim=slots[s];
-    var bk=students.filter(function(x){return x.slot===s&&x.verified==='Yes';}).length;
-    var rem=lim-bk; var full=rem<=0; var warn=rem<=3&&!full;
-    var div=document.createElement('div');
-    div.className='slot-card'+(full?' slot-full':'')+(st.slot===s?' selected':'');
-    div.innerHTML='<div class="slot-time">'+s+'</div><div class="slot-avail'+(full?' full':warn?' warn':'')+'">'+(full?'Full — pick another':(warn?rem+' spots left':rem+' spots open'))+'</div>';
-    if(!full) div.onclick=(function(ss){return function(){selectSlot(ss);};})(s);
-    g.appendChild(div);
-  });
-}
-
-// ── SELECTIONS ──
-function selectCourse(idx,name,price,dur){
-  [0,1,2,3,4,5,6,7,8,9,10,11].forEach(function(i){ document.getElementById('cc-'+i).classList.remove('selected'); });
-  document.getElementById('cc-'+idx).classList.add('selected');
-  st.courseName=name; st.coursePrice=price; st.courseDuration=dur; st.track='';
-  if(idx!==1){ var ts=document.getElementById('track-sel'); if(ts) ts.value=''; }
-}
-function setTrack(v){ st.track=v; }
-function selectSlot(s){ st.slot=s; renderSlots(); }
-function selectMode(el,m){
-  document.querySelectorAll('.mode-card').forEach(function(c){c.classList.remove('selected');});
-  el.classList.add('selected'); st.mode=m;
-}
-
-// ── STEPPER ──
-function goStep(n){
-  document.querySelectorAll('.step-panel').forEach(function(p){p.classList.remove('show');});
-  document.getElementById('sp-'+n).classList.add('show');
-  var dotN = (n===  '3a' || n==='3b') ? 3 : n;
-  [1,2,3,4].forEach(function(i){
-    var d=document.getElementById('dot-'+i), l=document.getElementById('lbl-'+i);
-    d.className='step-dot '+(i<dotN?'done':i===dotN?'active':'idle');
-    l.className='step-label'+(i<=dotN?' '+(i<dotN?'done':'active'):'');
-    if(i<4){ document.getElementById('line-'+i).className='step-line'+(i<dotN?' done':''); }
-  });
-  document.getElementById('form-top').scrollIntoView({behavior:'smooth'});
-}
-
-function goStep2(){
-  if(!st.courseName){ alert('Please select a course.'); return; }
-  if(st.courseName==='Coding for Beginners'){
-    var tv=document.getElementById('track-sel').value;
-    if(!tv){ alert('Please select a coding track.'); return; }
-    st.track=tv;
-  }
-  if(!st.slot){ alert('Please select a time slot.'); return; }
-  if(!st.mode){ alert('Please select a learning mode.'); return; }
-  var full=document.getElementById('cc-1').classList.contains('selected') ? st.courseName+' — '+st.track : st.courseName;
-  document.getElementById('summary-box').innerHTML=
-    '<b>Course:</b> '+full+'<br>'+
-    '<b>Time Slot:</b> '+st.slot+'<br>'+
-    '<b>Mode:</b> '+st.mode+'<br>'+
-    '<b>Fee:</b> <span style="font-weight:700">Ksh '+st.coursePrice.toLocaleString()+'</span>';
-  goStep(2);
-}
-
-function goStep3(){
-  var n=document.getElementById('inp-name').value.trim();
-  var p=document.getElementById('inp-phone').value.trim();
-  var e=document.getElementById('inp-email').value.trim();
-  var hasWa=document.getElementById('inp-has-whatsapp').checked;
-  if(!n){ alert('Please enter your full name.'); return; }
-  var cleanPhone = p.replace(/[\s\-()]/g,'');
-  if(!/^\+?[1-9]\d{6,14}$/.test(cleanPhone)){ alert('Please enter a valid phone number with country code (e.g. +254712345678).'); return; }
-  if(!hasWa && !e){ alert('Since this number isn\'t on WhatsApp, please provide an email address so we can send your confirmation.'); return; }
-  if(e && !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(e)){ alert('Please enter a valid email address.'); return; }
-  st.name=n; st.phone=cleanPhone; st.email=e; st.hasWhatsapp=hasWa;
-  goStep(3);
-}
-
-function toggleWhatsappReq(){}
-
-// ── PAYPAL CONFIG ──
-var PAYPAL_BUTTONS = {
-  'Computer Packages': { id: '6FYHNZXVXH5S2', usd: 15 },
-  'Coding for Beginners': { id: '3VVHZ7J4V8UQJ', usd: 32 },
-  'Online Writing & Freelancing': { id: 'WE2255KB4BXYL', usd: 18 },
-  'AI Fundamentals': { id: 'QPK5TVDBBK6EE', usd: 20 }
-};
-
-function choosePayMethod(method){
-  if(method==='mpesa'){
-    document.getElementById('pay-amount').textContent='Ksh '+st.coursePrice.toLocaleString();
-    document.getElementById('pay-amount-2').textContent='Ksh '+st.coursePrice.toLocaleString();
-    document.getElementById('pay-course').textContent=st.courseName;
-    startTimer();
-    goStep('3a');
-  } else {
-    loadPaypalButton();
-    goStep('3b');
-  }
-}
-
-function loadPaypalButton(){
-  var cfg = PAYPAL_BUTTONS[st.courseName];
-  var slot = document.getElementById('pp-button-slot');
-  document.getElementById('pp-course').textContent = st.courseName + (st.track ? ' — ' + st.track : '');
-  if(!cfg){
-    document.getElementById('pp-amount').textContent = '—';
-    slot.innerHTML = '<div style="color:var(--text3);font-size:13px">No PayPal option configured for this course. Please use M-Pesa or contact us.</div>';
-    return;
-  }
-  document.getElementById('pp-amount').textContent = '$' + cfg.usd + ' USD';
-  var containerId = 'paypal-container-' + cfg.id;
-  slot.innerHTML = '<div id="'+containerId+'" style="width:100%;min-width:200px;"></div>';
-  if(window.paypal && window.paypal.HostedButtons){
-    window.paypal.HostedButtons({ hostedButtonId: cfg.id }).render('#'+containerId);
-  } else {
-    slot.innerHTML = '<div style="color:var(--text3);font-size:13px">Loading payment button…</div>';
-    setTimeout(function(){
-      if(window.paypal && window.paypal.HostedButtons){
-        slot.innerHTML = '<div id="'+containerId+'" style="width:100%;min-width:200px;"></div>';
-        window.paypal.HostedButtons({ hostedButtonId: cfg.id }).render('#'+containerId);
-      } else {
-        slot.innerHTML = '<div style="color:var(--red);font-size:13px">Payment button failed to load. Please refresh the page.</div>';
-      }
-    }, 1500);
-  }
-}
-
-function renderSuccessConfirmation(){
-  var waBtn = document.getElementById('wa-share');
-  var notice = document.getElementById('conf-notice-text');
-  var icon = document.getElementById('conf-icon');
-  var sub = document.getElementById('success-sub');
-  if(st.hasWhatsapp){
-    document.getElementById('conf-phone').textContent = st.phone;
-    notice.innerHTML = 'A confirmation will be sent to <strong id="conf-phone">'+st.phone+'</strong> via WhatsApp once your payment is verified by admin.';
-    icon.textContent = '💬';
-    waBtn.style.display = 'inline-flex';
-    sub.textContent = 'Your details have been recorded. Admin will verify and send your WhatsApp confirmation shortly.';
-  } else {
-    notice.innerHTML = 'Since this number isn\'t on WhatsApp, a confirmation will be sent to <strong>'+(st.email||'your email')+'</strong> once your payment is verified by admin.';
-    icon.textContent = '📧';
-    waBtn.style.display = 'none';
-    sub.textContent = 'Your details have been recorded. Admin will verify and email your confirmation shortly.';
-  }
-}
-
-function goStep4(){
-  var code=document.getElementById('mpesa-code').value.trim();
-  if(code.length<6){ alert('Please enter a valid M-Pesa confirmation code (at least 6 characters).'); return; }
-  var dup=students.find(function(s){return s.mpesaCode===code;});
-  if(dup){ alert('This M-Pesa code has already been used. If you believe this is an error, call 0722216356.'); return; }
-  var bk=students.filter(function(s){return s.slot===st.slot&&s.verified==='Yes';}).length;
-  if(bk>=(slots[st.slot]||10)){ alert('This slot just filled up. Please go back and choose another slot.'); goStep(1); renderSlots(); return; }
-  st.mpesaCode=code;
-  var fullCourse=st.courseName+(st.track?' — '+st.track:'');
-  var rec={id:Date.now(),ts:new Date().toLocaleString(),name:st.name,phone:st.phone,email:st.email,hasWhatsapp:st.hasWhatsapp,course:fullCourse,slot:st.slot,mode:st.mode,price:st.coursePrice,mpesaCode:st.mpesaCode,payMethod:'M-Pesa',verified:'No',waSent:'No'};
-  students.push(rec); save(); stopTimer();
-  document.getElementById('receipt-box').innerHTML=
-    '<div class="receipt-row"><span>Name</span><span>'+st.name+'</span></div>'+
-    '<div class="receipt-row"><span>Course</span><span>'+fullCourse+'</span></div>'+
-    '<div class="receipt-row"><span>Time Slot</span><span>'+st.slot+'</span></div>'+
-    '<div class="receipt-row"><span>Mode</span><span>'+st.mode+'</span></div>'+
-    '<div class="receipt-row"><span>M-Pesa Code</span><span style="font-family:monospace">'+st.mpesaCode+'</span></div>'+
-    '<div class="receipt-row"><span>Amount Paid</span><span>Ksh '+st.coursePrice.toLocaleString()+'</span></div>';
-  var waMsg='Hello '+st.name+'! 🎓\n\nYour registration at NextGen Digital Skills Hub has been received.\n\nCourse: '+fullCourse+'\nTime Slot: '+st.slot+'\nMode: '+st.mode+'\nM-Pesa Code: '+st.mpesaCode+'\nAmount: Ksh '+st.coursePrice.toLocaleString()+'\n\nAdmin will verify your payment and send you a confirmation.\n\nQuestions? Call/WhatsApp 0722216356';
-  if(st.hasWhatsapp){ document.getElementById('wa-share').href='https://wa.me/'+st.phone+'?text='+encodeURIComponent(waMsg); }
-  renderSuccessConfirmation();
-  goStep(4);
-}
-
-function goStep4Paypal(){
-  var cfg = PAYPAL_BUTTONS[st.courseName];
-  var bk=students.filter(function(s){return s.slot===st.slot&&s.verified==='Yes';}).length;
-  if(bk>=(slots[st.slot]||10)){ alert('This slot just filled up. Please go back and choose another slot.'); goStep(1); renderSlots(); return; }
-  var fullCourse=st.courseName+(st.track?' — '+st.track:'');
-  var usdAmount = cfg ? cfg.usd : 0;
-  var rec={id:Date.now(),ts:new Date().toLocaleString(),name:st.name,phone:st.phone,email:st.email,hasWhatsapp:st.hasWhatsapp,course:fullCourse,slot:st.slot,mode:st.mode,price:st.coursePrice,usdAmount:usdAmount,mpesaCode:'PayPal-'+Date.now(),payMethod:'PayPal',verified:'No',waSent:'No'};
-  students.push(rec); save();
-  document.getElementById('receipt-box').innerHTML=
-    '<div class="receipt-row"><span>Name</span><span>'+st.name+'</span></div>'+
-    '<div class="receipt-row"><span>Course</span><span>'+fullCourse+'</span></div>'+
-    '<div class="receipt-row"><span>Time Slot</span><span>'+st.slot+'</span></div>'+
-    '<div class="receipt-row"><span>Mode</span><span>'+st.mode+'</span></div>'+
-    '<div class="receipt-row"><span>Payment Method</span><span>PayPal / Card</span></div>'+
-    '<div class="receipt-row"><span>Amount Paid</span><span>$'+usdAmount+' USD</span></div>';
-  var waMsg='Hello '+st.name+'! 🎓\n\nYour registration at NextGen Digital Skills Hub has been received.\n\nCourse: '+fullCourse+'\nTime Slot: '+st.slot+'\nMode: '+st.mode+'\nPayment: PayPal / Card — $'+usdAmount+' USD\n\nAdmin will verify your PayPal payment and send you a confirmation.\n\nQuestions? Call/WhatsApp 0722216356';
-  if(st.hasWhatsapp){ document.getElementById('wa-share').href='https://wa.me/'+st.phone+'?text='+encodeURIComponent(waMsg); }
-  renderSuccessConfirmation();
-  goStep(4);
-}
-
-function newReg(){
-  st={courseName:'',coursePrice:0,courseDuration:'',track:'',slot:'',mode:'',name:'',phone:'',email:'',mpesaCode:'',hasWhatsapp:true};
-  [0,1,2,3,4,5,6,7,8,9,10,11].forEach(function(i){document.getElementById('cc-'+i).classList.remove('selected');});
-  document.querySelectorAll('.mode-card').forEach(function(c){c.classList.remove('selected');});
-  ['inp-name','inp-phone','inp-email'].forEach(function(id){document.getElementById(id).value='';});
-  document.getElementById('mpesa-code').value='';
-  document.getElementById('track-sel').value='';
-  document.getElementById('inp-has-whatsapp').checked=true;
-  renderSlots(); goStep(1);
-}
-
-// ── TIMER ──
-function startTimer(){
-  timerSecs=900; stopTimer();
-  timerInt=setInterval(function(){
-    timerSecs--;
-    var m=Math.floor(timerSecs/60), s=timerSecs%60;
-    document.getElementById('timer-display').textContent=m+':'+(s<10?'0':'')+s;
-    document.getElementById('timer-num').textContent=m;
-    var pct=timerSecs/900;
-    document.getElementById('timer-circle').style.strokeDashoffset=(100.5*(1-pct)).toFixed(1);
-    if(timerSecs<=0){ stopTimer(); alert('Payment window expired. Please restart your registration.'); goStep(1); }
-  },1000);
-}
-function stopTimer(){ if(timerInt){clearInterval(timerInt);timerInt=null;} }
-
-// ── ADMIN ──
-function renderAdmin(){
-  var total=students.length;
-  var verified=students.filter(function(s){return s.verified==='Yes';}).length;
-  var pending=students.filter(function(s){return s.verified==='No';}).length;
-  var sent=students.filter(function(s){return s.waSent==='Sent';}).length;
-  var revenue=students.filter(function(s){return s.verified==='Yes';}).reduce(function(a,s){return a+(s.price||0);},0);
-  document.getElementById('admin-metrics').innerHTML=
-    '<div class="metric"><div class="metric-val">'+total+'</div><div class="metric-lbl">Total Registered</div></div>'+
-    '<div class="metric green"><div class="metric-val">'+verified+'</div><div class="metric-lbl">Verified</div></div>'+
-    '<div class="metric amber"><div class="metric-val">'+pending+'</div><div class="metric-lbl">Pending Verification</div></div>'+
-    '<div class="metric blue"><div class="metric-val">'+sent+'</div><div class="metric-lbl">WA Sent</div></div>'+
-    '<div class="metric"><div class="metric-val" style="font-size:20px;padding-top:6px">Ksh '+revenue.toLocaleString()+'</div><div class="metric-lbl">Revenue Verified</div></div>';
-  document.getElementById('slot-monitor').innerHTML=Object.keys(slots).map(function(s){
-    var lim=slots[s], bk=students.filter(function(x){return x.slot===s&&x.verified==='Yes';}).length;
-    var pct=Math.round((bk/lim)*100), cls=pct>=100?'full':pct>=70?'warn':'';
-    return '<div class="slot-mon-card"><div class="slot-mon-title">'+s+'</div><div class="slot-mon-meta">'+bk+' / '+lim+' confirmed</div><div class="sbar"><div class="sbar-fill '+cls+'" style="width:'+Math.min(pct,100)+'%"></div></div></div>';
-  }).join('');
-  renderAdminTable();
-}
-
-function renderAdminTable(){
-  var f=students.filter(function(s){
-    if(adminFilter==='pending') return s.verified==='No';
-    if(adminFilter==='verified') return s.verified==='Yes';
-    if(adminFilter==='sent') return s.waSent==='Sent';
-    return true;
-  });
-  var tbody=document.getElementById('admin-tbody');
-  if(!f.length){ tbody.innerHTML='<tr><td colspan="11" style="text-align:center;padding:32px;color:var(--text3)">No students found.</td></tr>'; return; }
-  tbody.innerHTML=f.map(function(s,i){
-    var ri=students.indexOf(s);
-    var sb=s.verified==='Yes'?'<span class="badge badge-green">✓ Verified</span>':'<span class="badge badge-amber">⏳ Pending</span>';
-    var wb=s.waSent==='Sent'?' <span class="badge badge-blue">📲 WA Sent</span>':'';
-    var act='';
-    if(s.verified==='No') act='<button class="btn-verify" onclick="verifyS('+ri+')">Verify ✓</button> <button class="btn-reject" onclick="rejectS('+ri+')">Reject</button>';
-    else if(s.waSent!=='Sent'){
-      if(s.hasWhatsapp===false){
-        act = s.email ? '<button class="btn-verify" onclick="sendConfirmEmail('+ri+')">Send Email 📧</button>' : '<span style="font-size:11px;color:var(--red)">No WhatsApp/Email!</span>';
-      } else {
-        act='<button class="btn-verify" onclick="sendWA('+ri+')">Send WA 📲</button>';
-      }
-    }
-    else act='<span style="font-size:11px;color:var(--text3)">✓ Complete</span>';
-    var method = s.payMethod || 'M-Pesa';
-    var methodBadge = method==='PayPal' ? '<span class="badge badge-blue">PayPal</span>' : '<span class="badge badge-green">M-Pesa</span>';
-    var codeOrAmount = method==='PayPal' ? '$'+(s.usdAmount||'?')+' USD' : s.mpesaCode;
-    var contactBadge = s.hasWhatsapp===false ? '<span class="badge badge-amber">📧 Email only</span>' : '<span class="badge badge-green">📲 WhatsApp</span>';
-    return '<tr><td style="color:var(--text3);font-size:11px">'+(i+1)+'</td><td style="font-weight:600">'+s.name+'</td><td style="font-size:12px">'+s.phone+'<br>'+contactBadge+'</td><td style="font-size:11px;max-width:130px">'+s.course+'</td><td style="font-size:12px;white-space:nowrap">'+s.slot+'</td><td style="font-size:12px">'+s.mode+'</td><td>'+methodBadge+'</td><td style="font-family:monospace;font-size:12px;font-weight:700;color:var(--green)">'+codeOrAmount+'</td><td style="font-size:11px;color:var(--text3);white-space:nowrap">'+s.ts+'</td><td>'+sb+wb+'</td><td style="white-space:nowrap">'+act+'</td></tr>';
-  }).join('');
-}
-
-function setFilter(f,btn){
-  adminFilter=f;
-  document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('on');});
-  btn.classList.add('on');
-  renderAdminTable();
-}
-function verifyS(idx){ students[idx].verified='Yes'; save(); renderAdmin(); }
-function rejectS(idx){
-  if(confirm('Remove this student record? This cannot be undone.')){ students.splice(idx,1); save(); renderAdmin(); }
-}
-function sendWA(idx){
-  var s=students[idx];
-  var msg='Hello '+s.name+'! ✅\n\nYour payment of Ksh '+s.price.toLocaleString()+' has been VERIFIED.\n\nCourse: '+s.course+'\nOnline Class Time: '+s.slot+'\nMode: '+s.mode+' (100% Online)\nStart Date: June 1st\n\nYou will be added to your WhatsApp class group shortly — all lessons are delivered online, no need to travel. Welcome! 🎓\n\nNextGen Digital Skills Hub\n📍 Office: Opposite La Serene, Kericho–Kisumu Highway\n📞 0722216356';
-  students[idx].waSent='Sent'; save(); renderAdmin();
-  window.open('https://wa.me/'+s.phone+'?text='+encodeURIComponent(msg),'_blank');
-}
-function sendConfirmEmail(idx){
-  var s=students[idx];
-  var subject='NextGen Digital Skills Hub — Registration Confirmed';
-  var body='Hello '+s.name+',\n\nYour payment of '+(s.payMethod==='PayPal' ? ('$'+(s.usdAmount||'')+' USD') : ('Ksh '+s.price.toLocaleString()))+' has been VERIFIED.\n\nCourse: '+s.course+'\nOnline Class Time: '+s.slot+'\nMode: '+s.mode+' (100% Online)\nStart Date: June 1st\n\nAll lessons are delivered fully online — no need to travel. Further class details will follow shortly. Welcome to NextGen Digital Skills Hub!\n\nOffice: Opposite La Serene, Kericho–Kisumu Highway\nCall/WhatsApp: 0722216356';
-  students[idx].waSent='Sent'; save(); renderAdmin();
-  window.open('mailto:'+s.email+'?subject='+encodeURIComponent(subject)+'&body='+encodeURIComponent(body),'_blank');
-}
-function exportCSV(){
-  var rows=[['#','Name','Phone','Has WhatsApp','Email','Course','Slot','Mode','Payment Method','M-Pesa Code','USD Amount','Registered','Verified','WA/Email Sent','Amount (Ksh)']];
-  students.forEach(function(s,i){ rows.push([i+1,s.name,s.phone,(s.hasWhatsapp===false?'No':'Yes'),s.email||'',s.course,s.slot,s.mode,s.payMethod||'M-Pesa',s.mpesaCode||'',s.usdAmount||'',s.ts,s.verified,s.waSent,s.price]); });
-  var csv=rows.map(function(r){return r.map(function(c){return '"'+String(c).replace(/"/g,'""')+'"';}).join(',');}).join('\n');
-  var a=document.createElement('a'); a.href='data:text/csv;charset=utf-8,'+encodeURIComponent(csv);
-  a.download='nextgen_students_'+new Date().toISOString().slice(0,10)+'.csv'; a.click();
-}
-
-// ── INIT ──
-renderSlots();
-</script>
-</body>
-</html>
